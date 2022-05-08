@@ -11,3 +11,31 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+button.guildSearch{
+  margin:0 0 0 1rem;
+}
+
+#guildContainer{
+  margin-top: 2rem;
+}
+.encounterCard{
+  padding: 1rem;
+  height: 15rem;
+}
+.encounterContainer{
+  padding-top: 1rem;
+}
+
+.encounterButton{
+  margin-top: 7rem;
+}
+
+.playerCard{
+  padding: .22rem;
+  padding-top: 1rem;
+}
+
+.btn-text{
+  font-size: 1rem !important;
+}

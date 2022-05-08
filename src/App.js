@@ -1,23 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import SiteNavbar from './components/SiteNavbar';
+import IndexPage from './pages/IndexPage/IndexPage';
+import GuildPage from './pages/GuildPage/GuildPage';
+import EncounterPage from './pages/EncounterPage/EncounterPage';
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SiteNavbar/>
+        <Routes>
+          <Route path="/" element={<IndexPage/>}/>
+          <Route path="/guild" element={<GuildPage/>}/>
+          <Route path="/guild/:guildId" element={<GuildPage/>}/>
+          <Route path='/guild/:guildId/encounter/:encounterId' element={<EncounterPage/>}/>
+        </Routes>
     </div>
   );
 }
