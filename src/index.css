@@ -23,8 +23,8 @@ button.guildSearch{
   padding: 1rem;
   height: 15rem;
 }
-.encounterContainer{
-  padding-top: 1rem;
+#encounterContainer{
+  margin-top: 2rem;
 }
 
 .encounterButton{
@@ -38,4 +38,23 @@ button.guildSearch{
 
 .btn-text{
   font-size: 1rem !important;
+}
+
+#bossHealthChart{
+  padding-top: 2rem;
+}
+
+#encounterTable{
+  padding-top: 1rem;
+}
+
+html body{background-color: #212529}
+
+#navbarTop {
+  background-color: #121212;
+}
+
+#encounterChart{
+  background-color:whitesmoke;
+  border-radius: 0.5rem;
 }

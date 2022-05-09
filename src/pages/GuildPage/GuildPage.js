@@ -6,6 +6,7 @@ import {
 import React from 'react';
 import EncounterCard from '../../components/EncounterCard';
 import PlayerCard from '../../components/PlayerCard';
+import LoadingComponent from '../../components/Loading';
 
 export default function GuildPage() {
       const [state, setState] = React.useState({
@@ -29,15 +30,7 @@ export default function GuildPage() {
             </Container>
       );
 
-      const loadingInfo = (
-        <Container id='guildContainer'>
-            <Row>
-                <Col>
-                  Loading
-                </Col>
-            </Row>
-        </Container>
-    );
+      const loadingInfo = (<LoadingComponent/>);
 
 
 

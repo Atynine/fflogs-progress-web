@@ -12,9 +12,10 @@ export default function SiteNavbar() {
         return (
             <div>
           <Navbar
-            color="dark"
+            color="#fff"
             dark
             expand="md"
+            id='navbarTop'
           >
             <NavbarBrand href="/">
               fflogs-progress
@@ -53,7 +54,7 @@ export default function SiteNavbar() {
               }}>
                 Search
               </Button>
-            </Collapse>/
+            </Collapse>
           </Navbar>
         </div>
         );
