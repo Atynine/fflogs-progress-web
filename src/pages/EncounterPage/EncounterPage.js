@@ -47,7 +47,7 @@ export default function EncounterPage() {
                     {new Date(fight.startTimestamp).toLocaleString()}
                   </td>
                   <td>
-                    {new Date(fight.endTimestamp).toLocaleString()}
+                    {msToTime(fight.endTimestamp - fight.startTimestamp)}
                   </td>
                   <td>
                     {fight.lastPhase}
@@ -116,7 +116,7 @@ export default function EncounterPage() {
         Start Time
       </th>
       <th>
-        End Time
+        Duration
       </th>
       <th>
         Last Phase
@@ -150,4 +150,22 @@ function renderDot(data){
   if(data.payload.newBest){
     return (<Dot key={data.key} r={4} cx={data.cx} cy={data.cy} stroke="red" strokeWidth={2} fill='#fff'></Dot>);
   }
+}
+
+function msToTime(s) {
+
+  // Pad to 2 or 3 digits, default is 2
+  function pad(n, z) {
+    z = z || 2;
+    return ('00' + n).slice(-z);
+  }
+
+  var ms = s % 1000;
+  s = (s - ms) / 1000;
+  var secs = s % 60;
+  s = (s - secs) / 60;
+  var mins = s % 60;
+  var hrs = (s - mins) / 60;
+
+  return pad(hrs) + ':' + pad(mins) + ':' + pad(secs) + '.' + pad(ms, 3);
 }
