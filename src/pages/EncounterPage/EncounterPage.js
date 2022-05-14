@@ -23,7 +23,7 @@ export default function EncounterPage() {
   React.useEffect(() => {
     if (state.loaded == true) return;
     if (params.guildId == null || state.guildFound == false) return;
-    fetch("http://localhost:8080/guild/" + params.guildId + "/encounter/" + params.encounterId)
+    fetch("http://18.220.108.74:8080/guild/" + params.guildId + "/encounter/" + params.encounterId)
       .then(res => res.json())
       .then((result) => {
         let pullSum = 1;
@@ -164,8 +164,7 @@ function msToTime(s) {
   s = (s - ms) / 1000;
   var secs = s % 60;
   s = (s - secs) / 60;
-  var mins = s % 60;
-  var hrs = (s - mins) / 60;
+  var mins = s;
 
-  return pad(hrs) + ':' + pad(mins) + ':' + pad(secs) + '.' + pad(ms, 3);
+  return pad(mins) + ':' + pad(secs) + '.' + pad(ms, 3);
 }

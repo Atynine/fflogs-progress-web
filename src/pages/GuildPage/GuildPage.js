@@ -38,7 +38,7 @@ export default function GuildPage() {
   React.useEffect(() => {
     if (state.loaded == true) return;
     if (params.guildId == null || state.guildFound == false) return;
-    fetch("http://localhost:8080/guild/" + params.guildId + "/recent")
+    fetch("http://18.220.108.74:8080/guild/" + params.guildId + "/recent")
       .then(res => res.json())
       .then((result) => {
         let fights = [];
