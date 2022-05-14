@@ -5,7 +5,7 @@ export default function LoadingComponent() {
         <Container id='guildContainer'>
             <Row>
                 <Col>
-                  Loading
+                    Loading
                 </Col>
             </Row>
         </Container>

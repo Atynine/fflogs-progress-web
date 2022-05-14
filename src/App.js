@@ -12,13 +12,13 @@ import {
 function App() {
   return (
     <div className="App">
-      <SiteNavbar/>
-        <Routes>
-          <Route path="/" element={<IndexPage/>}/>
-          <Route path="/guild" element={<GuildPage/>}/>
-          <Route path="/guild/:guildId" element={<GuildPage/>}/>
-          <Route path='/guild/:guildId/encounter/:encounterId' element={<EncounterPage/>}/>
-        </Routes>
+      <SiteNavbar />
+      <Routes>
+        <Route path="/" element={<IndexPage />} />
+        <Route path="/guild" element={<GuildPage />} />
+        <Route path="/guild/:guildId" element={<GuildPage />} />
+        <Route path='/guild/:guildId/encounter/:encounterId' element={<EncounterPage />} />
+      </Routes>
     </div>
   );
 }

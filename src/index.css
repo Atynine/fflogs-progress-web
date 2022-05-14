@@ -12,49 +12,56 @@ code {
     monospace;
 }
 
-button.guildSearch{
-  margin:0 0 0 1rem;
+button.guildSearch {
+  margin: 0 0 0 1rem;
 }
 
-#guildContainer{
+#guildContainer {
   margin-top: 2rem;
 }
-.encounterCard{
+
+.encounterCard {
   padding: 1rem;
   height: 15rem;
+  background-color: white;
+  border-radius: 1rem;
 }
-#encounterContainer{
+
+#encounterContainer {
   margin-top: 2rem;
 }
 
-.encounterButton{
+.encounterButton {
   margin-top: 7rem;
 }
 
-.playerCard{
+.playerCard {
   padding: .22rem;
   padding-top: 1rem;
+  width: 100%;
 }
 
-.btn-text{
+.btn-text {
   font-size: 1rem !important;
 }
 
-#bossHealthChart{
+#bossHealthChart {
   padding-top: 2rem;
 }
 
-#encounterTable{
+#encounterTable {
   padding-top: 1rem;
 }
 
-html body{background-color: #212529}
+html body {
+  background-color: #212529
+}
 
 #navbarTop {
   background-color: #121212;
 }
 
-#encounterChart{
-  background-color:whitesmoke;
+#encounterChart {
+  background-color: whitesmoke;
   border-radius: 0.5rem;
 }
