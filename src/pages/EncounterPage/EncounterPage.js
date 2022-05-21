@@ -7,7 +7,7 @@ import React from 'react';
 import EncounterCard from '../../components/EncounterCard';
 import PlayerCard from '../../components/PlayerCard';
 import LoadingComponent from '../../components/Loading';
-import { Dot, Label, Legend, LineChart, Line, YAxis, XAxis, CartesianGrid, ResponsiveContainer, Tooltip } from 'recharts';
+import { Dot, Label, Legend, LineChart, Line, YAxis, XAxis, CartesianGrid, ResponsiveContainer, Tooltip, ReferenceLine } from 'recharts';
 
 
 export default function EncounterPage() {
@@ -16,7 +16,6 @@ export default function EncounterPage() {
     chartData: []
   });
   let params = useParams();
-  const data = [{ name: 'Page A', uv: 400, pv: 2400, amt: 2400 }];
   const loadingInfo = (<LoadingComponent></LoadingComponent>);
 
 
@@ -30,13 +29,16 @@ export default function EncounterPage() {
         let fightData = [];
         let fightRows = [];
         let minPercent = 101;
+        let bossName;
+        let fightId;
+        let transitions = {};
         result.forEach(fight => {
           fightData.push({
             name: pullSum,
-            bossPercentage: fight.kill ? 0 : fight.bossPercentage,
+            bossPercentage: fight.kill ? 0 : fight.fightPercentage,
             completeRaid: fight.completeRaid,
             kill: fight.kill,
-            newBest: fight.bossPercentage < minPercent
+            newBest: fight.fightPercentage < minPercent
           });
 
           fightRows.unshift((<tr key={pullSum}>
@@ -60,7 +62,16 @@ export default function EncounterPage() {
             </td>
           </tr>));
 
-          if (fight.bossPercentage < minPercent) minPercent = fight.bossPercentage;
+          if (fight.fightPercentage < minPercent) minPercent = fight.fightPercentage;
+          if (transitions[fight.lastPhase]){
+            if(transitions[fight.lastPhase] > fight.fightPercentage){
+              transitions[fight.lastPhase] = fight.fightPercentage;
+            }
+          }else{
+            transitions[fight.lastPhase] = fight.fightPercentage;
+          }
+          bossName = fight.name;
+          fightId = fight.encounterID;
           pullSum++;
         });
 
@@ -68,7 +79,10 @@ export default function EncounterPage() {
           loaded: true,
           fights: result,
           fightData: fightData,
-          fightRows: fightRows
+          fightRows: fightRows,
+          bossName: bossName,
+          fightId: fightId,
+          transitions: transitions
         });
       }).catch(e => {
         setState({
@@ -79,15 +93,24 @@ export default function EncounterPage() {
   );
 
   if (!state.loaded) return loadingInfo;
+
+  let referenceLines = [];
+  if(state.fightId == "1061"){
+    referenceLines.push((<ReferenceLine key="Garuda" type="monotone" y={state.transitions[1]} dataKey="bossPercentage" stroke="#0c822b" strokeWidth={2} strokeDasharray="5 5" label="Garuda" dot={renderDot} />));
+    //TODO Lmao add more lines, could be better but am lazy
+  }
   return (
     <Container id="encounterContainer">
+      <Row>
+      <Col id='bossName'><h1>{state.bossName}</h1></Col>
+      </Row>
       <Row>
         <Col>
           <ResponsiveContainer width="100%" height={400} id="encounterChart">
             <LineChart data={state.fightData} margin={{ top: 5, right: 40, left: 5, bottom: 15 }}>
               <CartesianGrid stroke="#ccc" />
-              <Line type="monotone" dataKey="bossPercentage" stroke="#24040a" name='Boss Health' dot={renderDot} />
-
+              <Line type="monotone" dataKey="bossPercentage" stroke="#24040a" name="Fight Percentage" dot={renderDot} />
+              {referenceLines}
               <XAxis type="number" dataKey="name" domain={['dataMin', 'dataMax']}>
                 <Label value="Pull" offset={-5} position="insideBottom" />
               </XAxis>
@@ -143,12 +166,12 @@ function formatPullLabel(value, name) {
 }
 
 function formatPull(value, name, props) {
-  if (name == "Boss Health") return value + "%";
+  if (name == "Fight Percentage") return value + "%";
   return value;
 }
 function renderDot(data) {
   if (data.payload.newBest) {
-    return (<Dot key={data.key} r={4} cx={data.cx} cy={data.cy} stroke="red" strokeWidth={2} fill='#fff'></Dot>);
+    return (<Dot key={data.key} r={2} cx={data.cx} cy={data.cy} stroke="red" strokeWidth={2} fill='#fff'></Dot>);
   }
 }
 
